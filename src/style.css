@@ -1,5 +1,7 @@
-
 :root {
+
+  /* TODO: Fix this ugly colour scheme */
+
   /* Colors */
   --clr-accent-500: hsl(180, 60%, 15%);
   --clr-accent-400: hsl(180, 60%, 20%);
@@ -251,7 +253,7 @@ strong {
   color: var(--clr-neutral-100);
 }
 
-@media (max-width: 47em) {
+@media (max-width: 50em) {
   .primary-header[data-overlay]{
     position: relative;
     z-index: 999;
@@ -260,11 +262,11 @@ strong {
   .primary-navigation {
     display: none;
     position: fixed;
-    padding: var(--size-700);
+    padding: var(--size-500);
     inset: 7rem var(--size-400) auto;
     max-width: 25rem;
     margin-inline: auto;
-    background: white;
+    background: var(--clr-neutral-900);
     border-radius: var(--size-100);
     box-shadow: 0 0 .5em rgb(0, 0, 0, 0.125);
   }
@@ -275,8 +277,6 @@ strong {
     inset: 0;
     background-image: linear-gradient(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.8));
   }
-
-
 
   .primary-navigation[data-visible] {
     display: block;
