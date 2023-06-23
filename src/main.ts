@@ -14,10 +14,19 @@ if(navToggle != null &&
     primaryNav.hasAttribute("data-visible")
     ? document.body.style.overflowY = 'visible'
     : document.body.style.overflowY = 'hidden';
+    primaryNav.hasAttribute("data-visible")
+    ? document.body.style.touchAction = 'auto'
+    : document.body.style.touchAction = 'none';
     primaryNav.toggleAttribute("data-visible");
     primaryHeader.toggleAttribute("data-overlay");
   });
 }
+
+//Helper code for the glitch effect
+const glitchElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch'));
+glitchElements.forEach(element => {
+  element.style.setProperty('--glitch-content', `'${element.textContent}'`);
+});
 
 // Below code is to display a scrolling background.
 // Currently it displays the current pages HTML because I thought that would be funky
@@ -74,8 +83,8 @@ style.textContent = `
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    color: #555;
+    width: 75%;
+    color: #4f4f4f;
     animation: scroll ${animationDuration}s linear infinite;
     overflow: hidden; /* Hide overflowing content */
     -webkit-user-select: none; /* Safari */
@@ -86,21 +95,21 @@ style.textContent = `
   pre {
     font-size: 1.5rem;
     font-weight: bold;
-    text-shadow: 0 0 0.3em #555;
+    text-shadow: 0 0 0.3em #4f4f4f;
   }
 
   @keyframes scroll {
     0% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(5%) translateY(0%);
+      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(0%);
     }
     ${100-startingPointKeyframe}% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(5%) translateY(${amountToMoveBgAsPercentage}%);
+      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(${amountToMoveBgAsPercentage}%);
     }
     ${100-startingPointKeyframe+0.000001}% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(5%) translateY(-100%); /* Jump to the top suddenly */
+      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(-100%); /* Jump to the top suddenly */
     }
     100% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(5%) translateY(0%); /* Animate back to the middle */
+      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(0%); /* Animate back to the middle */
     }
   }
 
