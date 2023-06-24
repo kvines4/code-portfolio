@@ -1,34 +1,39 @@
-// Behaviour for the primary nav on mobile
+// ----- Behaviour for the primary nav on mobile -----
 const primaryHeader:HTMLElement = document.querySelector('.primary-header') as HTMLElement;
 const navToggle:HTMLElement     = document.querySelector('.mobile-nav-toggle') as HTMLElement;
 const primaryNav:HTMLElement    = document.querySelector('.primary-navigation') as HTMLElement;
 
-if(navToggle != null &&
-  primaryNav != null &&
-  primaryHeader != null)
-{
-  navToggle.addEventListener("click", () => {
-    primaryNav.hasAttribute("data-visible")
+navToggle.addEventListener("click", () => {
+  primaryNav.hasAttribute("data-visible")
     ? navToggle.setAttribute("aria-expanded", "false")
     : navToggle.setAttribute("aria-expanded", "true");
-    primaryNav.hasAttribute("data-visible")
-    ? document.body.style.overflowY = 'visible'
-    : document.body.style.overflowY = 'hidden';
-    primaryNav.hasAttribute("data-visible")
-    ? document.body.style.touchAction = 'auto'
-    : document.body.style.touchAction = 'none';
-    primaryNav.toggleAttribute("data-visible");
-    primaryHeader.toggleAttribute("data-overlay");
-  });
-}
+  primaryNav.hasAttribute("data-visible")
+    ? (document.body.style.overflowY = "visible")
+    : (document.body.style.overflowY = "hidden");
+  primaryNav.hasAttribute("data-visible")
+    ? (document.body.style.touchAction = "auto")
+    : (document.body.style.touchAction = "none");
+  primaryNav.toggleAttribute("data-visible");
+  primaryHeader.toggleAttribute("data-overlay");
+});
 
-//Helper code for the glitch effect
+// ----- Helper code for the glitch effect -----
 const glitchElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch'));
 glitchElements.forEach(element => {
+  const randomDelay = Math.random() * 2000;
+  element.style.setProperty('--glitch-anim-delay', `${-randomDelay}ms`);
+  const randomDirection = Math.random() < 0.5 ? 'alternate' : 'alternate-reverse';
+  element.style.setProperty('--glitch-anim-dir', randomDirection);
+  const randomDuration = (Math.random() * 1.5) + 1.5;
+  element.style.setProperty('--glitch-anim-duration', `${randomDuration}s`);
+  element.style.setProperty('--glitch-content', `'${element.textContent}'`);
+});
+const glitchDelayElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch-delay'));
+glitchDelayElements.forEach(element => {
   element.style.setProperty('--glitch-content', `'${element.textContent}'`);
 });
 
-// Below code is to display a scrolling background.
+// ----- Below code is to display a scrolling background -----
 // Currently it displays the current pages HTML because I thought that would be funky
 // TODO: update to allow passing in value per page to override
 

@@ -1,6 +1,8 @@
 # **About The Project**
 
-Code for my portfolio website which can be found [here](https://kvines4.github.io/code-portfolio/):
+This is the code repository for my portfolio website which can be found [here](https://kvines4.github.io/code-portfolio/).
+
+It is a work in progress while I learn more about css and slowly figure out what style I want.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
