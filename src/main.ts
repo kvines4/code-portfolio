@@ -1,7 +1,7 @@
 // ----- Behaviour for the primary nav on mobile -----
 const primaryHeader:HTMLElement = document.querySelector('.primary-header') as HTMLElement;
 const navToggle:HTMLElement     = document.querySelector('.mobile-nav-toggle') as HTMLElement;
-const primaryNav:HTMLElement    = document.querySelector('.primary-navigation') as HTMLElement;
+const primaryNav:HTMLElement    = document.querySelector('.primary-nav') as HTMLElement;
 
 navToggle.addEventListener("click", () => {
   primaryNav.hasAttribute("data-visible")
@@ -49,8 +49,10 @@ const scrollingBackground:HTMLElement = document.querySelector('.scrolling-backg
 
 // create pre element (rich text) for attaching to our background scroll elements
 var sourceCode:string = document.documentElement.innerHTML;
+// Remove inline styles using regular expressions to tidy it up a bit
+var cleanedSourceCode: string = sourceCode.replace(/ style="[^"]*"/g, '');
 var preElement:HTMLPreElement = document.createElement('pre');
-preElement.textContent = sourceCode;
+preElement.textContent = cleanedSourceCode;
 scrollingBackground.appendChild(preElement);
 
 // We need to make a const copy so we can duplicate it below
@@ -79,17 +81,18 @@ const animationDuration:number = 50 / animationDurationModifier; // Adjust the m
 const style:HTMLStyleElement = document.createElement('style');
 style.textContent = `
   :root {
-    --rotateX: 2deg;
-    --rotateY: -3deg;
-    --rotateZ: 5deg;
+    --bg-rotateX: 2deg;
+    --bg-rotateY: -3deg;
+    --bg-rotateZ: 5deg;
+    --bg-translateX: 8%;
+    --bg-translateX-sm: -10%;
   }
 
   .scrolling-background {
     position: fixed;
     top: 0;
     left: 0;
-    width: 75%;
-    color: #4f4f4f;
+    color: #777;
     animation: scroll ${animationDuration}s linear infinite;
     overflow: hidden; /* Hide overflowing content */
     -webkit-user-select: none; /* Safari */
@@ -97,40 +100,47 @@ style.textContent = `
     user-select: none; /* Standard syntax */
   }
 
+  @media (min-width: 50em) {
+    .scrolling-background {
+      width: 75%;
+    }
+  }
+
   pre {
     font-size: 1.5rem;
     font-weight: bold;
-    text-shadow: 0 0 0.3em #4f4f4f;
+    text-shadow: 0 0 0.3em #777;
+    white-space: pre-wrap;
   }
 
   @keyframes scroll {
     0% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(0%);
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%);
     }
     ${100-startingPointKeyframe}% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(${amountToMoveBgAsPercentage}%);
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(${amountToMoveBgAsPercentage}%);
     }
     ${100-startingPointKeyframe+0.000001}% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(-100%); /* Jump to the top suddenly */
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(-100%); /* Jump to the top suddenly */
     }
     100% {
-      transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(4%) translateY(0%); /* Animate back to the middle */
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%); /* Animate back to the middle */
     }
   }
 
   @media (max-width: 50em) {
     @keyframes scroll {
       0% {
-        transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(-10%) translateY(0%);
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(0%);
       }
       ${100-startingPointKeyframe}% {
-        transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(-10%) translateY(${amountToMoveBgAsPercentage}%);
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(${amountToMoveBgAsPercentage}%);
       }
       ${100-startingPointKeyframe+0.000001}% {
-        transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(-10%) translateY(-100%); /* Jump to the top suddenly */
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(-100%); /* Jump to the top suddenly */
       }
       100% {
-        transform: perspective(5000px) rotateX(var(--rotateX)) rotateY(var(--rotateY)) rotateZ(var(--rotateZ)) translateX(-10%) translateY(0%); /* Animate back to the middle */
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(0%); /* Animate back to the middle */
       }
     }
   }
@@ -170,6 +180,6 @@ function rotateElement(event:MouseEvent, element:HTMLElement): void {
   const offsetY:number = ((y - middleY) / middleY) * mouseMovementModifier;
   const offsetX:number = ((x - middleX) / middleX) * mouseMovementModifier;
 
-  element.style.setProperty("--rotateX", ((-1 * offsetY)+2) + "deg");
-  element.style.setProperty("--rotateY", (offsetX-3) + "deg");
+  element.style.setProperty("--bg-rotateX", ((-1 * offsetY)+2) + "deg");
+  element.style.setProperty("--bg-rotateY", (offsetX-3) + "deg");
 }
