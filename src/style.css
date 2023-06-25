@@ -3,16 +3,14 @@
   /* TODO: Fix this ugly colour scheme */
 
   /* Colors */
-  --clr-accent-500: hsl(180, 60%, 15%);
-  --clr-accent-400: hsl(180, 60%, 20%);
-  --clr-accent-300: hsl(180, 60%, 25%);
-  --clr-accent-100: hsl(180, 60%, 30%);
+  --clr-primary-400: hsl(232 12% 13%);
 
-  --clr-primary-400: hsl(0, 0%, 27%);
-
-  --clr-neutral-900: hsl(232, 12%, 13%);
+  --clr-neutral-900: hsl(0 0% 25%);
   --clr-neutral-100: hsl(0 0% 80%);
   --clr-neutral-200: hsl(0 0% 90%);
+
+  --clr-text-background-default: hsl(0, 0%, 35%); /* hsl(232 12% 13%); */ /* for when the blur effect isn't supported */
+  --clr-text-background-lit: hsl(0 0% 100% / 0.1);
 
   /* Font family, sizing etc */
   --ff-primary: "Be Vietnam Pro", sans-serif;
@@ -140,7 +138,7 @@ body {
   font-size: var(--fs-body);
   font-family: var(--ff-body);
   color: white;
-  background-color: var(--clr-primary-400);
+  background-color: var(--clr-neutral-900);
 }
 
 .background {
@@ -160,7 +158,7 @@ body {
 
 section {
   padding: 1rem 0rem;
-  background: hsl(232 12% 13% / .5);
+  background: var(--clr-text-background-default);
   border-radius: var(--size-300);
   max-width: 70rem;
   margin-inline: auto;
@@ -168,7 +166,7 @@ section {
 
 @supports (backdrop-filter: blur(.5rem)) {
   section {
-    background: hsl(0 0% 100% / 0.1);
+    background: var(--clr-text-background-lit);
     backdrop-filter: blur(.5rem);  
   }
 }
@@ -208,7 +206,7 @@ strong {
   margin-bottom: 2rem;
   padding-top: var(--size-500);
   padding: 1rem 0rem;
-  background: hsl(232 12% 13% / .5);
+  background: hsl(--clr-text-background-default);
   border-radius: var(--size-300);
   max-width: 70rem;
   margin-inline: auto;
@@ -216,7 +214,7 @@ strong {
 
 @supports (backdrop-filter: blur(.5rem)) {
   .primary-header {
-    background: hsl(0 0% 100% / 0.1);
+    background: var(--clr-text-background-lit);
     backdrop-filter: blur(.5rem);  
   }
 }
@@ -270,8 +268,14 @@ strong {
     content: "";
     position: fixed;
     inset: 0;
-    background: hsl(0 0% 100% / 0.1);
-    backdrop-filter: blur(.5rem);
+    background: hsl(--clr-text-background-default);
+  }
+
+  @supports (backdrop-filter: blur(.5rem)) {
+    .primary-header[data-overlay]::before {
+      background: var(--clr-text-background-lit);
+      backdrop-filter: blur(.5rem);  
+    }
   }
 
   .primary-nav[data-visible] {
@@ -285,7 +289,7 @@ strong {
     inset: 7rem var(--size-400) auto;
     max-width: 15rem;
     margin-inline: auto;
-    background: var(--clr-neutral-900);
+    background: var(--clr-primary-400);
     border-radius: var(--size-100);
   }
 
@@ -417,15 +421,7 @@ strong {
 }
 
 .text-primary-400 {
-  color: var(--clr-primary-400);
-}
-
-.text-accent-400 {
-  color: var(--clr-accent-400);
-}
-
-.text-accent-100 {
-  color: var(--clr-accent-100);
+  color: var(--clr-neutral-900);
 }
 
 .text-neutral-100 {
@@ -433,19 +429,11 @@ strong {
 }
 
 .text-neutral-900 {
-  color: var(--clr-neutral-900);
+  color: var(--clr-primary-400);
 }
 
 .bg-primary-400 {
-  background-color: var(--clr-primary-400);
-}
-
-.bg-accent-400 {
-  background-color: var(--clr-accent-400);
-}
-
-.bg-accent-100 {
-  background-color: var(--clr-accent-100);
+  background-color: var(--clr-neutral-900);
 }
 
 .bg-neutral-100 {
@@ -453,7 +441,7 @@ strong {
 }
 
 .bg-neutral-900 {
-  background-color: var(--clr-neutral-900);
+  background-color: var(--clr-primary-400);
 }
 
 .fw-bold {
@@ -556,7 +544,7 @@ strong {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: var(--glitch-bg-override, var(--clr-primary-400, black));
+  background: var(--glitch-bg-override, #585858);
   overflow: hidden;
   top: 0;
   animation-name: none; /* Disable the animations by default */
@@ -651,7 +639,7 @@ strong {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: var(--clr-neutral-900);
+  background: var(--clr-primary-400);
   overflow: hidden;
   top: 0;
 }
