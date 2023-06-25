@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
     
-    <script type="module" crossorigin src="/code-portfolio/assets/index-f4bd67b6.js"></script>
-    <link rel="stylesheet" href="/code-portfolio/assets/index-52585dba.css">
+    <script type="module" crossorigin src="/code-portfolio/assets/index-7a78fe6f.js"></script>
+    <link rel="stylesheet" href="/code-portfolio/assets/index-8faf7d92.css">
   </head>
 
   <body>
@@ -22,27 +22,29 @@
       </div>
     </div>
     <div class="content">
+      <!-- menu toggle. only visible in mobile -->
+      <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false">
+        <span class="visually-hidden">Menu</span>
+      </button>
       <header class="primary-header">
         <div class="container">
-          <!-- menu toggle. only visible in mobile -->
-          <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
-            <span class="visually-hidden">Menu</span>
-          </button>
-          <nav class="primary-navigation" id="primary-navigation">
-            <ul class="primary-nav-list text-center-sm" role="nav-list" aria-label="Primary" >
-              <li><a class="glitch" style="--glitch-left-offset: 5px" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-              <li><a class="glitch" style="--glitch-left-offset: 5px" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
-              <li><a class="glitch" style="--glitch-left-offset: 5px" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
-              <li><a class="glitch" href="/Project/1">Project 1</a></li>
-              <li><a class="glitch" href="/Project/2">Project 2</a></li>
-              <li><a class="glitch" href="/Project/3">Project 3</a></li>
-            </ul>
-          </nav>
+          <div class="nav-wrapper">
+            <nav class="primary-nav" id="primary-nav">
+              <ul class="primary-nav-list text-center-sm" role="nav-list" aria-label="Primary" >
+                <li><a class="glitch" style="--glitch-left-offset: 5px" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a class="glitch" style="--glitch-left-offset: 5px" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
+                <li><a class="glitch" style="--glitch-left-offset: 5px" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
+                <li><a class="glitch" href="/Project/1">Project 1</a></li>
+                <li><a class="glitch" href="/Project/2">Project 2</a></li>
+                <li><a class="glitch" href="/Project/3">Project 3</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </header>
     
       <main>
-        <section class="margin-top-500">
+        <section>
           <div class="container">
             <h1 class="fs-primary-heading fw-bold margin-bottom-400">Project</h1>
             <h3 class="fs-600 fw-bold">Project Description</h3>
@@ -86,13 +88,10 @@
             <div class="even-columns">
               <nav class="footer-nav">
                 <ul aria-label="Footer" role="nav-list">
-                  <li><a class="glitch" style="--glitch-left-offset: 5px --glitch-bg-override: --clr-neutral-900" href="/">
-                    <i class="fa-solid fa-house"></i> Home</a></li>
-                  <li><a class="glitch" style="--glitch-left-offset: 5px --glitch-bg-override: --clr-neutral-900" href="/AboutMe">
-                    <i class="fa-solid fa-user"></i> About Me</a></li>
-                  <li><a class="glitch" style="--glitch-left-offset: 5px --glitch-bg-override: --clr-neutral-900" href="/Projects">
-                    <i class="fa-solid fa-code"></i> Projects</a></li>
-                </ul>
+                  <li><a class="glitch" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-neutral-900;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+                  <li><a class="glitch" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-neutral-900;" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
+                  <li><a class="glitch" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-neutral-900;" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
+                    </ul>
               </nav>
               <nav class="footer-nav">
                 <ul aria-label="Footer" role="nav-list">
@@ -103,7 +102,7 @@
               </nav>
             </div>
           </div>
-          <div class="primary-footer-form">
+          <div>
             <p class="fw-bold fs-600">Where to find me</p>
             <div class="text-center-sm footer-links text-center fs-700">
               <a href="https://www.linkedin.com/in/kristianvines"><i class="fa-brands fa-linkedin"></i></a>
