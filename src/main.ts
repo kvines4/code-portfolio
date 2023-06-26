@@ -17,6 +17,15 @@ navToggle.addEventListener("click", () => {
   primaryHeader.toggleAttribute("data-overlay");
 });
 
+// ----- Helper code for the CRT effect -----
+const setRatio = () => {
+  document.body.style.setProperty('--vw', (self.innerWidth / 100).toString());
+  document.body.style.setProperty('--vh', (self.innerHeight / 100).toString());
+}
+
+setRatio();
+window.addEventListener('resize', setRatio)
+
 // ----- Helper code for the glitch effect -----
 const glitchElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch'));
 glitchElements.forEach(element => {
@@ -107,7 +116,9 @@ style.textContent = `
   }
 
   pre {
-    font-size: 1.5rem;
+    padding: 5px;
+    font-family: var(--ff-logo);
+    font-size: 1rem;
     font-weight: bold;
     text-shadow: 0 0 0.3em #777;
     white-space: pre-wrap;
