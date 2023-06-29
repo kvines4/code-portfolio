@@ -1,0 +1,463 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '../styles/main.css';
+import logo from '../images/logo.gif';
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{title}</title>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Coding Portfolio" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/gif" href={logo} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet" /> 
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    <div>
+      <div id="bg-container" class="background">
+        <div class="scrolling-background"></div>
+      </div>
+      <div class="content">
+        <Header />
+        <slot />
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+/* Glitch Hover Style */
+
+.glitch {
+  color: white;
+  font-weight: 800;
+  position: relative;
+  padding: 3px;
+}
+
+.glitch:hover::before,
+.glitch:hover::after,
+.glitch:focus::before,
+.glitch:focus::after {
+  padding: 3px;
+  margin-left: var(--glitch-left-offset, 0px);
+  color: white;
+  content: var(--glitch-content);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--glitch-bg-override, #585858);
+  overflow: hidden;
+  top: 0;
+  animation-name: none; /* Disable the animations by default */
+}
+
+.glitch:hover::before,
+.glitch:focus::before {
+  left: 3px;
+  text-shadow: -2px 0 red;
+  animation-name: glitch-animation-1;
+  animation-duration: var(--glitch-anim-duration, 2s);
+  animation-timing-function: linear;
+  animation-delay: var(--glitch-anim-delay, 0s);
+  animation-iteration-count: infinite;
+  animation-direction: var(--glitch-anim-dir, alternate-reverse);
+}
+
+.glitch:hover::after,
+.glitch:focus::after {
+  left: -3px;
+  text-shadow: -2px 0 blue;
+  animation-name: glitch-animation-2;
+  animation-duration: var(--glitch-anim-duration, 2s);
+  animation-timing-function: linear;
+  animation-delay: var(--glitch-anim-delay, 0s);
+  animation-iteration-count: infinite;
+  animation-direction: var(--glitch-anim-dir, alternate-reverse);
+}
+
+@keyframes glitch-animation-1 {
+  0%   { clip: rect(4.229em, 10.417em, 3.125em, 0.625em); }
+  5%   { clip: rect(1.792em, 10.417em, 3.906em, 0.625em); }
+  10%  { clip: rect(0.760em, 10.417em, 0.094em, 0.625em); }
+  15%  { clip: rect(0.833em, 10.417em, 1.660em, 0.625em); }
+  20%  { clip: rect(2.375em, 10.417em, 3.406em, 0.625em); }
+  25%  { clip: rect(2.500em, 10.417em, 4.031em, 0.625em); }
+  30%  { clip: rect(1.750em, 10.417em, 2.969em, 0.625em); }
+  35%  { clip: rect(2.750em, 10.417em, 0.531em, 0.625em); }
+  40%  { clip: rect(1.625em, 10.417em, 1.406em, 0.625em); }
+  45%  { clip: rect(1.532em, 10.417em, 1.156em, 0.625em); }
+  50%  { clip: rect(0.229em, 10.417em, 3.094em, 0.625em); }
+  55%  { clip: rect(0.656em, 10.417em, 4.156em, 0.625em); }
+  60%  { clip: rect(2.375em, 10.417em, 3.406em, 0.625em); }
+  65%  { clip: rect(2.906em, 10.417em, 0.625em, 0.625em); }
+  70%  { clip: rect(2.000em, 10.417em, 2.563em, 0.625em); }
+  75%  { clip: rect(3.000em, 10.417em, 3.469em, 0.625em); }
+  80%  { clip: rect(2.375em, 10.417em, 3.125em, 0.625em); }
+  85%  { clip: rect(2.938em, 10.417em, 1.719em, 0.625em); }
+  90%  { clip: rect(1.146em, 10.417em, 1.406em, 0.625em); }
+  95%  { clip: rect(3.958em, 10.417em, 3.406em, 0.625em); }
+  100% { clip: rect(1.208em, 10.417em, 3.437em, 0.625em); }
+}
+
+@keyframes glitch-animation-2 {
+  0%   { clip: rect(0.438em, 10.417em, 0.457em, 0.625em); }
+  5%   { clip: rect(3.354em, 10.417em, 0.781em, 0.625em); }
+  10%  { clip: rect(0.057em, 10.417em, 0.028em, 0.625em); }
+  15%  { clip: rect(0.114em, 10.417em, 1.656em, 0.625em); }
+  20%  { clip: rect(2.519em, 10.417em, 1.319em, 0.625em); }
+  25%  { clip: rect(1.600em, 10.417em, 3.125em, 0.625em); }
+  30%  { clip: rect(2.400em, 10.417em, 3.043em, 0.625em); }
+  35%  { clip: rect(0.300em, 10.417em, 0.625em, 0.625em); }
+  40%  { clip: rect(1.800em, 10.417em, 1.194em, 0.625em); }
+  45%  { clip: rect(3.200em, 10.417em, 1.684em, 0.625em); }
+  50%  { clip: rect(1.750em, 10.417em, 2.781em, 0.625em); }
+  55%  { clip: rect(1.185em, 10.417em, 3.043em, 0.625em); }
+  60%  { clip: rect(1.714em, 10.417em, 2.844em, 0.625em); }
+  65%  { clip: rect(2.900em, 10.417em, 1.371em, 0.625em); }
+  70%  { clip: rect(2.357em, 10.417em, 3.511em, 0.625em); }
+  75%  { clip: rect(3.760em, 10.417em, 2.708em, 0.625em); }
+  80%  { clip: rect(3.000em, 10.417em, 1.042em, 0.625em); }
+  85%  { clip: rect(0.114em, 10.417em, 0.344em, 0.625em); }
+  90%  { clip: rect(2.743em, 10.417em, 3.958em, 0.625em); }
+  95%  { clip: rect(1.229em, 10.417em, 1.628em, 0.625em); }
+  100% { clip: rect(3.760em, 10.417em, 0.771em, 0.625em); }
+}
+
+/* Glitch Hover Style Delayed */
+
+.glitch-delay {
+  color: white;
+  font-weight: 800;
+  position: relative;
+  padding: 3px;
+}
+
+.glitch-delay::before,
+.glitch-delay::after {
+  padding: 3px;
+  color: white;
+  content: var(--glitch-content);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-primary-400);
+  overflow: hidden;
+  top: 0;
+}
+
+.glitch-delay::before {
+  left: 3px;
+  text-shadow: -2px 0 red;
+  animation-name: glitch-delay-animation-1;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
+.glitch-delay::after {
+  left: -3px;
+  text-shadow: -2px 0 blue;
+  animation-name: glitch-delay-animation-2;
+  animation-duration: 25s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes glitch-delay-animation-1 {
+  0%   { clip: rect(0em, 0em, 0em, 0em); }
+  80%  { clip: rect(0em, 0em, 0em, 0em); }
+  81%  { clip: rect(1.792em, 10.417em, 3.906em, 0.625em); }
+  82%  { clip: rect(0.760em, 10.417em, 0.094em, 0.625em); }
+  83%  { clip: rect(0.833em, 10.417em, 1.660em, 0.625em); }
+  84%  { clip: rect(2.375em, 10.417em, 3.406em, 0.625em); }
+  85%  { clip: rect(2.500em, 10.417em, 4.031em, 0.625em); }
+  86%  { clip: rect(1.750em, 10.417em, 2.969em, 0.625em); }
+  87%  { clip: rect(2.750em, 10.417em, 0.531em, 0.625em); }
+  88%  { clip: rect(1.625em, 10.417em, 1.406em, 0.625em); }
+  89%  { clip: rect(1.532em, 10.417em, 1.156em, 0.625em); }
+  90%  { clip: rect(0.229em, 10.417em, 3.094em, 0.625em); }
+  91%  { clip: rect(0.656em, 10.417em, 4.156em, 0.625em); }
+  92%  { clip: rect(2.375em, 10.417em, 3.406em, 0.625em); }
+  93%  { clip: rect(2.906em, 10.417em, 0.625em, 0.625em); }
+  94%  { clip: rect(2.000em, 10.417em, 2.563em, 0.625em); }
+  95%  { clip: rect(3.000em, 10.417em, 3.469em, 0.625em); }
+  96%  { clip: rect(2.375em, 10.417em, 3.125em, 0.625em); }
+  97%  { clip: rect(2.938em, 10.417em, 1.719em, 0.625em); }
+  98%  { clip: rect(1.146em, 10.417em, 1.406em, 0.625em); }
+  99%  { clip: rect(3.958em, 10.417em, 3.406em, 0.625em); }
+  100% { clip: rect(1.208em, 10.417em, 3.437em, 0.625em); }
+}
+
+@keyframes glitch-delay-animation-2 {
+  0%   { clip: rect(0em, 0em, 0em, 0em); }
+  80%  { clip: rect(0em, 0em, 0em, 0em); }
+  81%  { clip: rect(3.354em, 10.417em, 0.781em, 0.625em); }
+  82%  { clip: rect(0.057em, 10.417em, 0.028em, 0.625em); }
+  83%  { clip: rect(0.114em, 10.417em, 1.656em, 0.625em); }
+  84%  { clip: rect(2.519em, 10.417em, 1.319em, 0.625em); }
+  85%  { clip: rect(1.600em, 10.417em, 3.125em, 0.625em); }
+  86%  { clip: rect(2.400em, 10.417em, 3.043em, 0.625em); }
+  87%  { clip: rect(0.300em, 10.417em, 0.625em, 0.625em); }
+  88%  { clip: rect(1.800em, 10.417em, 1.194em, 0.625em); }
+  89%  { clip: rect(3.200em, 10.417em, 1.684em, 0.625em); }
+  90%  { clip: rect(1.750em, 10.417em, 2.781em, 0.625em); }
+  91%  { clip: rect(1.185em, 10.417em, 3.043em, 0.625em); }
+  92%  { clip: rect(1.714em, 10.417em, 2.844em, 0.625em); }
+  93%  { clip: rect(2.900em, 10.417em, 1.371em, 0.625em); }
+  94%  { clip: rect(2.357em, 10.417em, 3.511em, 0.625em); }
+  95%  { clip: rect(3.760em, 10.417em, 2.708em, 0.625em); }
+  96%  { clip: rect(3.000em, 10.417em, 1.042em, 0.625em); }
+  97%  { clip: rect(0.114em, 10.417em, 0.344em, 0.625em); }
+  98%  { clip: rect(2.743em, 10.417em, 3.958em, 0.625em); }
+  99%  { clip: rect(1.229em, 10.417em, 1.628em, 0.625em); }
+  100% { clip: rect(3.760em, 10.417em, 0.771em, 0.625em); }
+}
+
+.scanlines::after {
+  position: fixed;
+  top: 0;
+  left: min(calc((var(--vh) / var(--vw) - 1) * 10px), 10px);
+  height: 100%;
+  width: calc(100% - min(calc(((var(--vh) / var(--vw) - 1) * 10px)*2), 20px));
+  background-image: url('../images/crt.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  content: "";
+  z-index: 10;
+  pointer-events: none;
+}
+
+.scanlines::before {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  content: " ";
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 10;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+@media (orientation: portrait) {
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(calc((var(--vh) / var(--vw) - 1) * 10px + 2px), 10px);
+    background-color: black;
+    z-index: 10;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(calc((var(--vh) / var(--vw) - 1) * 10px + 2px), 10px);
+    background-color: black;
+    z-index: 10;
+  }
+
+  body {
+    margin: 0 min(calc((var(--vh) / var(--vw) - 1) * 10px), 10px);
+  }
+}
+</style>
+
+<script>
+  // ----- Behaviour for the primary nav on mobile -----
+const primaryHeader:HTMLElement = document.querySelector('.primary-header') as HTMLElement;
+const navToggle:HTMLElement     = document.querySelector('.mobile-nav-toggle') as HTMLElement;
+const primaryNav:HTMLElement    = document.querySelector('.primary-nav') as HTMLElement;
+
+navToggle.addEventListener("click", () => {
+  primaryNav.hasAttribute("data-visible")
+    ? navToggle.setAttribute("aria-expanded", "false")
+    : navToggle.setAttribute("aria-expanded", "true");
+  primaryNav.hasAttribute("data-visible")
+    ? (document.body.style.overflowY = "visible")
+    : (document.body.style.overflowY = "hidden");
+  primaryNav.hasAttribute("data-visible")
+    ? (document.body.style.touchAction = "auto")
+    : (document.body.style.touchAction = "none");
+  primaryNav.toggleAttribute("data-visible");
+  primaryHeader.toggleAttribute("data-overlay");
+});
+
+// ----- Helper code for the CRT effect -----
+const setRatio = () => {
+  document.body.style.setProperty('--vw', (self.innerWidth / 100).toString());
+  document.body.style.setProperty('--vh', (self.innerHeight / 100).toString());
+}
+
+setRatio();
+window.addEventListener('resize', setRatio)
+
+// ----- Helper code for the glitch effect -----
+const glitchElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch'));
+glitchElements.forEach(element => {
+  const randomDelay = Math.random() * 2000;
+  element.style.setProperty('--glitch-anim-delay', `${-randomDelay}ms`);
+  const randomDirection = Math.random() < 0.5 ? 'alternate' : 'alternate-reverse';
+  element.style.setProperty('--glitch-anim-dir', randomDirection);
+  const randomDuration = (Math.random() * 1.5) + 1.5;
+  element.style.setProperty('--glitch-anim-duration', `${randomDuration}s`);
+  element.style.setProperty('--glitch-content', `'${element.textContent}'`);
+});
+const glitchDelayElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch-delay'));
+glitchDelayElements.forEach(element => {
+  element.style.setProperty('--glitch-content', `'${element.textContent}'`);
+});
+
+// ----- Below code is to display a scrolling background -----
+// Currently it displays the current pages HTML because I thought that would be funky
+// TODO: update to allow passing in value per page to override
+
+// Modifiers
+const animationDurationModifier:number = 3;
+
+// Get the main container element
+const backgroundContainer:HTMLElement = document.getElementById("bg-container") as HTMLElement;
+// Get the scrolling background element
+const scrollingBackground:HTMLElement = document.querySelector('.scrolling-background') as HTMLElement;
+
+// create pre element (rich text) for attaching to our background scroll elements
+var sourceCode:string = document.documentElement.innerHTML;
+// Remove styles using regular expressions to tidy it up a bit
+sourceCode = sourceCode.replace(/ style="[^"]*"/g, '');
+sourceCode = sourceCode.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
+var preElement:HTMLPreElement = document.createElement('pre');
+preElement.textContent = sourceCode;
+scrollingBackground.appendChild(preElement);
+
+// We need to make a const copy so we can duplicate it below
+const scrollingBackgroundString:string = (document.querySelector('.scrolling-background') as HTMLElement).innerHTML;
+
+// Get the height of the scrolling background element (pixels) and the height of the window (pixels)
+const backgroundHeight:number = scrollingBackground.offsetHeight;
+const windowHeight:number = window.innerHeight;
+
+// Calculate the number of copies needed to cover the full window height (plus one for space above screen)
+const numberOfCopies:number = Math.ceil(windowHeight / backgroundHeight);
+const totalBgElements:number = numberOfCopies + 1;
+
+// since we rounded up we will overshoot
+const overshootPercentage:number = (numberOfCopies - (windowHeight / backgroundHeight)) * 100;
+const amountToMoveBgAsPercentage:number = ((windowHeight / backgroundHeight) * 100) + overshootPercentage;
+const totalDistanceAsPercentageOfBgHeight:number = amountToMoveBgAsPercentage + 100;
+
+// Since the content is of dynamic link, this will change where the starting point (0%) is in the keyframe animation
+const startingPointKeyframe:number = (100 / totalDistanceAsPercentageOfBgHeight) * 100;
+const animationDuration:number = 1000 / animationDurationModifier; // Adjust the multiplier as needed
+
+// Define the styles and keyframes animation using the calculated percentage
+const style:HTMLStyleElement = document.createElement('style');
+style.textContent = `
+  :root {
+    --bg-rotateX: 2deg;
+    --bg-rotateY: -3deg;
+    --bg-rotateZ: 5deg;
+    --bg-translateX: 8%;
+    --bg-translateX-sm: -10%;
+  }
+
+  .scrolling-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: #777;
+    animation: scroll ${animationDuration}s linear infinite;
+    overflow: hidden; /* Hide overflowing content */
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  @media (min-width: 50em) {
+    .scrolling-background {
+      width: 75%;
+    }
+  }
+
+  pre {
+    padding: 5px;
+    font-family: var(--ff-logo);
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 0 0 0.3em #777;
+    white-space: pre-wrap;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%);
+    }
+    ${100-startingPointKeyframe}% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(${amountToMoveBgAsPercentage}%);
+    }
+    ${100-startingPointKeyframe+0.000001}% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(-100%); /* Jump to the top suddenly */
+    }
+    100% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%); /* Animate back to the middle */
+    }
+  }
+
+  @media (max-width: 50em) {
+    @keyframes scroll {
+      0% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(0%);
+      }
+      ${100-startingPointKeyframe}% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(${amountToMoveBgAsPercentage}%);
+      }
+      ${100-startingPointKeyframe+0.000001}% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(-100%); /* Jump to the top suddenly */
+      }
+      100% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX-sm)) translateY(0%); /* Animate back to the middle */
+      }
+    }
+  }
+
+`;
+document.head.appendChild(style);
+
+// Calculate the animation delay percentage
+const animationDelayPercentage:number = 1 / (numberOfCopies+1);
+
+// Create the copies of the scrolling background for infinite scrolling w/ no whitespace
+for (let i = 0; i < numberOfCopies; i++) {
+  const copy:HTMLDivElement = document.createElement('div');
+  copy.classList.add('scrolling-background');
+  // Add a copy of the content
+  copy.innerHTML = scrollingBackgroundString;
+  // Set the animation delay for each copy
+  const animationDelay:number = animationDuration*animationDelayPercentage*(i+1);
+  copy.style.animationDelay = '-' + animationDelay + 's';
+  backgroundContainer.appendChild(copy);
+}
+</script>
