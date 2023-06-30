@@ -1,6 +1,6 @@
 <script>
-  const glitchElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch'));
-  glitchElements.forEach(element => {
+  const glitchHoverElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch-hover'));
+  glitchHoverElements.forEach(element => {
     const randomDelay = Math.random() * 2000;
     element.style.setProperty('--glitch-anim-delay', `${-randomDelay}ms`);
     const randomDirection = Math.random() < 0.5 ? 'alternate' : 'alternate-reverse';
@@ -13,10 +13,13 @@
   glitchDelayElements.forEach(element => {
     element.style.setProperty('--glitch-content', `'${element.textContent}'`);
   });
+  const glitchElements:HTMLElement[] = Array.from(document.querySelectorAll('.glitch'));
+  glitchElements.forEach(element => {
+    element.style.setProperty('--glitch-content', `'${element.textContent}'`);
+  });
 </script>
 
 <style is:global>
-  /* Glitch Hover Style */
   .glitch {
     color: white;
     font-weight: 800;
@@ -24,10 +27,58 @@
     padding: 3px;
   }
 
-  .glitch:hover::before,
-  .glitch:hover::after,
-  .glitch:focus::before,
-  .glitch:focus::after {
+  .glitch::before,
+  .glitch::after,
+  .glitch::before,
+  .glitch::after {
+    padding: 3px;
+    margin-left: var(--glitch-left-offset, 0px);
+    color: white;
+    content: var(--glitch-content);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--glitch-bg-override, black);
+    overflow: hidden;
+    top: 0;
+  }
+
+  .glitch::before,
+  .glitch::before {
+    left: 3px;
+    text-shadow: -2px 0 red;
+    animation-name: glitch-animation-1;
+    animation-duration: var(--glitch-anim-duration, 2s);
+    animation-timing-function: linear;
+    animation-delay: var(--glitch-anim-delay, 0s);
+    animation-iteration-count: infinite;
+    animation-direction: var(--glitch-anim-dir, alternate-reverse);
+  }
+
+  .glitch::after,
+  .glitch::after {
+    left: -3px;
+    text-shadow: -2px 0 blue;
+    animation-name: glitch-animation-2;
+    animation-duration: var(--glitch-anim-duration, 2s);
+    animation-timing-function: linear;
+    animation-delay: var(--glitch-anim-delay, 0s);
+    animation-iteration-count: infinite;
+    animation-direction: var(--glitch-anim-dir, alternate-reverse);
+  }
+
+  /* Glitch Hover Style */
+  .glitch-hover {
+    color: white;
+    font-weight: 800;
+    position: relative;
+    padding: 3px;
+  }
+
+  .glitch-hover:hover::before,
+  .glitch-hover:hover::after,
+  .glitch-hover:focus::before,
+  .glitch-hover:focus::after {
     padding: 3px;
     margin-left: var(--glitch-left-offset, 0px);
     color: white;
@@ -41,8 +92,8 @@
     animation-name: none; /* Disable the animations by default */
   }
 
-  .glitch:hover::before,
-  .glitch:focus::before {
+  .glitch-hover:hover::before,
+  .glitch-hover:focus::before {
     left: 3px;
     text-shadow: -2px 0 red;
     animation-name: glitch-animation-1;
@@ -53,8 +104,8 @@
     animation-direction: var(--glitch-anim-dir, alternate-reverse);
   }
 
-  .glitch:hover::after,
-  .glitch:focus::after {
+  .glitch-hover:hover::after,
+  .glitch-hover:focus::after {
     left: -3px;
     text-shadow: -2px 0 blue;
     animation-name: glitch-animation-2;
@@ -129,7 +180,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--clr-primary-400);
+    background: var(--glitch-bg-override, #585858);
     overflow: hidden;
     top: 0;
   }
@@ -140,7 +191,7 @@
     animation-name: glitch-delay-animation-1;
     animation-duration: 25s;
     animation-timing-function: linear;
-    animation-delay: 0s;
+    animation-delay: var(--glitch-anim-delay, 0s);
     animation-iteration-count: infinite;
   }
 
@@ -150,7 +201,7 @@
     animation-name: glitch-delay-animation-2;
     animation-duration: 20s;
     animation-timing-function: linear;
-    animation-delay: 0s;
+    animation-delay: var(--glitch-anim-delay, 0s);
     animation-iteration-count: infinite;
   }
 

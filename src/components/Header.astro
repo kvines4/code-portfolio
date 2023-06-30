@@ -1,22 +1,163 @@
+---
+import logo from '../images/logo-t.gif';
+---
 <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false">
   <span class="visually-hidden">Menu</span>
 </button>
 <header class="primary-header margin-top-600">
-  <div class="container">
-    <div class="nav-wrapper">
-      <nav class="primary-nav" id="primary-nav">
-        <ul class="primary-nav-list text-center-sm" role="nav-list" aria-label="Primary" >
-          <li><a class="glitch" style="--glitch-left-offset: 5px" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-          <li><a class="glitch" style="--glitch-left-offset: 5px" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
-          <li><a class="glitch" style="--glitch-left-offset: 5px" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
-          <li><a class="glitch" href="/Project/1">Project 1</a></li>
-          <li><a class="glitch" href="/Project/2">Project 2</a></li>
-          <li><a class="glitch" href="/Project/3">Project 3</a></li>
-        </ul>
-      </nav>
+  <div class="fs-primary-heading fw-bold header-logo-container">
+    <div class="header-logo-content">
+      <img src={logo}>
     </div>
   </div>
+  <nav class="primary-nav" id="primary-nav">
+    <ul class="primary-nav-list text-center-sm" aria-role="nav-list" aria-label="Primary" >
+      <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background; --glitch-left-offset: 5px;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+      <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background; --glitch-left-offset: 5px;" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
+      <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background; --glitch-left-offset: 5px;" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
+      <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background" href="/Project/1">Project 1</a></li>
+      <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background" href="/Project/2">Project 2</a></li>
+      <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background" href="/Project/3">Project 3</a></li>
+    </ul>
+  </nav>
 </header>
+
+<style>
+  :root {
+    --header-height: 100px;
+    --logo-height: 64px;
+  }
+
+  .header-logo-container {
+    border-radius: var(--size-300);
+    background: hsla(var(--clr-panel-background), var(--panel-alpha));
+    height: var(--header-height);
+    backdrop-filter: blur(.75rem);
+    -webkit-backdrop-filter: blur(.75rem);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  }
+
+  .header-logo-content {
+    aspect-ratio: 1 / 1;
+    height: 100%;
+  }
+
+  .header-logo-content img {
+    margin: calc((var(--header-height) - var(--logo-height)) / 2);
+    width: var(--logo-height);
+    aspect-ratio: 1 / 1;
+  }
+  
+  .primary-header {
+    display:grid;
+    grid-auto-flow:column;
+    grid-template-columns: var(--header-height) 1fr;
+    gap: var(--size-600);
+    margin-bottom: var(--size-600);
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+  }
+
+  .primary-nav-list {
+    margin: calc((var(--header-height) - var(--logo-height)) / 2) 0em;
+    padding: var(--size-400);
+    display: flex;
+    justify-content:space-around;
+    gap: clamp(var(--size-300), 2vw, var(--size-900));
+  }
+
+  .primary-nav-list a {
+    font-size: var(--fs-nav);
+    font-weight: var(--fw-bold);
+    text-decoration: none;
+    color: hsl(var(--clr-text-default));
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+  }
+
+  .primary-nav-list {
+    border-radius: var(--size-300);
+    background: hsla(var(--clr-panel-background), var(--panel-alpha));
+    backdrop-filter: blur(.75rem);
+    -webkit-backdrop-filter: blur(.75rem);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  }
+
+  @media (max-width: 50em) {
+    .primary-header {
+      backdrop-filter: none;
+    }
+    
+    .primary-header[data-overlay]{
+      position: relative;
+      z-index: 8;
+    }
+
+    .primary-header[data-overlay]::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: hsl(var(--crl-panel-background));
+      z-index: 8;
+      backdrop-filter: blur(.75rem);
+      -webkit-backdrop-filter: blur(.75rem);
+    }
+
+    .primary-nav[data-visible] {
+      display: block;
+    }
+
+    .primary-nav {
+      display: none;
+      position: fixed;
+      padding: var(--size-500);
+      inset: 7rem var(--size-400) auto;
+      max-width: 15rem;
+      margin-inline: auto;
+      background: hsl(var(--clr-footer-background));
+      border-radius: var(--size-100);
+      z-index: 9;
+    }
+
+    .primary-nav-list {
+      display: grid;
+      gap: var(--size-400);
+      background: none;
+      backdrop-filter: none;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+    }
+
+    .mobile-nav-toggle {
+      display: block;
+      position: fixed;
+      top: var(--size-500);
+      right: var(--size-500);
+      z-index: 9;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      padding: var(--size-200);
+      width: var(--size-600);
+      aspect-ratio: 1;
+      background-image: url('../images/icon-hamburger.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .mobile-nav-toggle[aria-expanded="true"] {
+      background-image: url('../images/icon-close.svg');
+    }
+  }
+</style>
 
 <script>
 // ----- Behaviour for the primary nav on mobile -----

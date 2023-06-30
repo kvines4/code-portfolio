@@ -1,24 +1,24 @@
-<footer class="primary-footer padding-block-700 margin-top-600 bg-neutral-900 text-neutral-100">
+<footer class="primary-footer padding-block-700 margin-top-600 bg-footer-background text-primary">
   <div class="container">
     <div class="even-columns">
       <div class="text-center-sm footer-section">
-        <p class="logo fs-700 glitch-delay">[K.Vines]</p>
+        <p class="logo fs-700 glitch-delay" style="--glitch-bg-override: --clr-page-background">[K.Vines]</p>
         <p>Coding Portfolio</p>
       </div>
       <div class="footer-section">
         <div class="even-columns">
           <nav class="footer-nav">
-            <ul aria-label="Footer" role="nav-list">
-              <li><a class="glitch" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-neutral-900;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-              <li><a class="glitch" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-neutral-900;" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
-              <li><a class="glitch" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-neutral-900;" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
+            <ul aria-label="Footer" aria-role="nav-list">
+              <li><a class="glitch-hover" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-page-background;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
+              <li><a class="glitch-hover" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-page-background;" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
+              <li><a class="glitch-hover" style="--glitch-left-offset: 18px; --glitch-bg-override: --clr-page-background;" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
                 </ul>
           </nav>
           <nav class="footer-nav">
-            <ul aria-label="Footer" role="nav-list">
-              <li><a class="glitch" style="--glitch-bg-override: --clr-neutral-900" href="/Project/1">Project 1</a></li>
-              <li><a class="glitch" style="--glitch-bg-override: --clr-neutral-900" href="/Project/2">Project 2</a></li>
-              <li><a class="glitch" style="--glitch-bg-override: --clr-neutral-900" href="/Project/3">Project 3</a></li>
+            <ul aria-label="Footer" aria-role="nav-list">
+              <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background" href="/Project/1">Project 1</a></li>
+              <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background" href="/Project/2">Project 2</a></li>
+              <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background" href="/Project/3">Project 3</a></li>
             </ul>
           </nav>
         </div>
@@ -33,3 +33,30 @@
     </div>
   </div>
 </footer>
+
+<style>
+  .primary-footer {
+    font-size: var(--fs-nav);
+    margin-top: auto;
+  }
+
+  .primary-footer>*>*>* {
+    margin-inline: auto;
+  }
+
+  .footer-nav a {
+    color: var(--clr-primary);
+    text-decoration: none;
+  }
+
+  .footer-links a {
+    color: var(--clr-primary);
+    text-decoration: none;
+    padding: 0 var(--size-200);
+  }
+
+  .footer-links a:where(:hover, :focus) {
+    color: white;
+    text-decoration: none;
+  }
+</style>

@@ -1,8 +1,8 @@
 ---
-const { content, animSpeedModifier = 1 } = Astro.props;
+const { content, animSpeedModifier = 1, textColor = "hsl(var(--clr-scrolling-font-default))" } = Astro.props;
 ---
 
-<div id="bg-container" class="background" data-content={content} data-anim-speed-modifier={animSpeedModifier}>
+<div id="bg-container" class="background" data-content={content} data-anim-speed-modifier={animSpeedModifier} data-text-color={textColor}>
   <div class="scrolling-background"></div>
 </div>
 
@@ -15,6 +15,7 @@ var animSpeedModifier:number =
    Number(backgroundContainer.dataset.animSpeedModifier) != 0) 
     ? Number(backgroundContainer.dataset.animSpeedModifier) 
     : 1;
+var textColor:string = backgroundContainer.dataset.textColor as string;
 
 // Get the scrolling background element
 const scrollingBackground:HTMLElement = document.querySelector('.scrolling-background') as HTMLElement;
@@ -65,7 +66,7 @@ style.textContent = `
     position: fixed;
     top: 0;
     left: 50%;
-    color: #777;
+    color: ${textColor};
     animation: scroll ${animationDuration}s linear infinite;
     overflow: hidden;
     -webkit-user-select: none; /* Safari */
@@ -78,7 +79,7 @@ style.textContent = `
     font-family: var(--ff-logo);
     font-size: 1rem;
     font-weight: bold;
-    text-shadow: 0 0 0.3em #777;
+    text-shadow: 0 0 0.3em ${textColor};
     white-space: pre-wrap;
     overflow: hidden;
     word-wrap: break-word;
