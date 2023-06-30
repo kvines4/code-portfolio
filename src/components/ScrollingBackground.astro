@@ -1,0 +1,135 @@
+---
+const { content, animSpeedModifier = 1 } = Astro.props;
+---
+
+<div id="bg-container" class="background" data-content={content} data-anim-speed-modifier={animSpeedModifier}>
+  <div class="scrolling-background"></div>
+</div>
+
+<script>
+// Get the main container element and params
+const backgroundContainer:HTMLElement = document.getElementById("bg-container") as HTMLElement;
+var content:string = backgroundContainer.dataset.content as string;
+var animSpeedModifier:number = 
+  (backgroundContainer.dataset.animSpeedModifier && 
+   Number(backgroundContainer.dataset.animSpeedModifier) != 0) 
+    ? Number(backgroundContainer.dataset.animSpeedModifier) 
+    : 1;
+
+// Get the scrolling background element
+const scrollingBackground:HTMLElement = document.querySelector('.scrolling-background') as HTMLElement;
+
+// create pre element (rich text) for attaching to our background scroll elements
+if(!content){
+  // if no content provided, we're going to use the pages own HTML as a default
+  content = document.documentElement.innerHTML;
+  // Remove styles using regular expressions to tidy it up a bit
+  content = content.replace(/ style="[^"]*"/g, '');
+  content = content.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
+}
+var preElement:HTMLPreElement = document.createElement('pre');
+preElement.textContent = content;
+scrollingBackground.appendChild(preElement);
+
+// We need to make a const copy so we can duplicate it below
+const scrollingBackgroundString:string = (document.querySelector('.scrolling-background') as HTMLElement).innerHTML;
+
+// Get the height of the scrolling background element (pixels) and the height of the window (pixels)
+const backgroundHeight:number = scrollingBackground.offsetHeight;
+const windowHeight:number = window.innerHeight;
+
+// Calculate the number of copies needed to cover the full window height (plus one for space above screen)
+const numberOfCopies:number = Math.ceil(windowHeight / backgroundHeight);
+
+// since we rounded up we will overshoot
+const overshootPercentage:number = (numberOfCopies - (windowHeight / backgroundHeight)) * 100;
+const amountToMoveBgAsPercentage:number = ((windowHeight / backgroundHeight) * 100) + overshootPercentage;
+const totalDistanceAsPercentageOfBgHeight:number = amountToMoveBgAsPercentage + 100;
+
+// Since the content is dynamic, calculate all values for animation
+const startingPointKeyframe:number = (100 / totalDistanceAsPercentageOfBgHeight) * 100;
+const desiredSpeed:number = 25; // pixels per second
+const animationDuration: number = ((backgroundHeight / desiredSpeed) * (totalDistanceAsPercentageOfBgHeight / 100)) * animSpeedModifier;
+
+// Define the styles and keyframes animation using the calculated percentage
+const style:HTMLStyleElement = document.createElement('style');
+style.textContent = `
+  :root {
+    --bg-rotateX: 2deg;
+    --bg-rotateY: -3deg;
+    --bg-rotateZ: 5deg;
+    --bg-translateX: -60%;
+  }
+
+  .scrolling-background {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    color: #777;
+    animation: scroll ${animationDuration}s linear infinite;
+    overflow: hidden;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+  }
+
+  pre {
+    padding: 5px;
+    font-family: var(--ff-logo);
+    font-size: 1rem;
+    font-weight: bold;
+    text-shadow: 0 0 0.3em #777;
+    white-space: pre-wrap;
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%);
+    }
+    ${100-startingPointKeyframe}% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(${amountToMoveBgAsPercentage}%);
+    }
+    ${100-startingPointKeyframe+0.000001}% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(-100%); /* Jump to the top suddenly */
+    }
+    100% {
+      transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%); /* Animate back to the middle */
+    }
+  }
+
+  @media (max-width: 50em) {
+    @keyframes scroll {
+      0% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%);
+      }
+      ${100-startingPointKeyframe}% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(${amountToMoveBgAsPercentage}%);
+      }
+      ${100-startingPointKeyframe+0.000001}% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(-100%); /* Jump to the top suddenly */
+      }
+      100% {
+        transform: perspective(5000px) rotateX(var(--bg-rotateX)) rotateY(var(--bg-rotateY)) rotateZ(var(--bg-rotateZ)) translateX(var(--bg-translateX)) translateY(0%); /* Animate back to the middle */
+      }
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// Calculate the animation delay percentage
+const animationDelayPercentage:number = 1 / (numberOfCopies+1);
+
+// Create the copies of the scrolling background for infinite scrolling w/ no whitespace
+for (let i = 0; i < numberOfCopies; i++) {
+  const copy:HTMLDivElement = document.createElement('div');
+  copy.classList.add('scrolling-background');
+  // Add a copy of the content
+  copy.innerHTML = scrollingBackgroundString;
+  // Set the animation delay for each copy
+  const animationDelay:number = animationDuration*animationDelayPercentage*(i+1);
+  copy.style.animationDelay = '-' + animationDelay + 's';
+  backgroundContainer.appendChild(copy);
+}
+</script>

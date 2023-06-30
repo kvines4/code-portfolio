@@ -17,3 +17,24 @@
     </div>
   </div>
 </header>
+
+<script>
+// ----- Behaviour for the primary nav on mobile -----
+const primaryHeader:HTMLElement = document.querySelector('.primary-header') as HTMLElement;
+const navToggle:HTMLElement     = document.querySelector('.mobile-nav-toggle') as HTMLElement;
+const primaryNav:HTMLElement    = document.querySelector('.primary-nav') as HTMLElement;
+
+navToggle.addEventListener("click", () => {
+  primaryNav.hasAttribute("data-visible")
+    ? navToggle.setAttribute("aria-expanded", "false")
+    : navToggle.setAttribute("aria-expanded", "true");
+  primaryNav.hasAttribute("data-visible")
+    ? (document.body.style.overflowY = "visible")
+    : (document.body.style.overflowY = "hidden");
+  primaryNav.hasAttribute("data-visible")
+    ? (document.body.style.touchAction = "auto")
+    : (document.body.style.touchAction = "none");
+  primaryNav.toggleAttribute("data-visible");
+  primaryHeader.toggleAttribute("data-overlay");
+});
+</script>
