@@ -5,13 +5,13 @@ import logo from '../images/logo-t.gif';
   <span class="visually-hidden">Menu</span>
 </button>
 <header class="primary-header margin-top-600">
-  <div class="fs-primary-heading fw-bold header-logo-container">
+  <div class="fs-primary-heading fw-bold header-logo-container panel">
     <div class="header-logo-content">
       <img src={logo}>
     </div>
   </div>
   <nav class="primary-nav" id="primary-nav">
-    <ul class="primary-nav-list text-center-sm" aria-role="nav-list" aria-label="Primary" >
+    <ul class="primary-nav-list text-center-sm panel-lg" aria-role="nav-list" aria-label="Primary" >
       <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background; --glitch-left-offset: 5px;" href="/"><i class="fa-solid fa-house"></i> Home</a></li>
       <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background; --glitch-left-offset: 5px;" href="/AboutMe"><i class="fa-solid fa-user"></i> About Me</a></li>
       <li><a class="glitch-hover" style="--glitch-bg-override: --clr-page-background; --glitch-left-offset: 5px;" href="/Projects"><i class="fa-solid fa-code"></i> Projects</a></li>
@@ -30,13 +30,7 @@ import logo from '../images/logo-t.gif';
 
   .header-logo-container {
     border-radius: var(--size-300);
-    background: hsla(var(--clr-panel-background), var(--panel-alpha));
     height: var(--header-height);
-    backdrop-filter: blur(.75rem);
-    -webkit-backdrop-filter: blur(.75rem);
-    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
   }
 
   .header-logo-content {
@@ -79,21 +73,7 @@ import logo from '../images/logo-t.gif';
     display: none;
   }
 
-  .primary-nav-list {
-    border-radius: var(--size-300);
-    background: hsla(var(--clr-panel-background), var(--panel-alpha));
-    backdrop-filter: blur(.75rem);
-    -webkit-backdrop-filter: blur(.75rem);
-    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-  }
-
   @media (max-width: 50em) {
-    .primary-header {
-      backdrop-filter: none;
-    }
-    
     .primary-header[data-overlay]{
       position: relative;
       z-index: 8;
@@ -128,11 +108,6 @@ import logo from '../images/logo-t.gif';
     .primary-nav-list {
       display: grid;
       gap: var(--size-400);
-      background: none;
-      backdrop-filter: none;
-      box-shadow: none;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
     }
 
     .mobile-nav-toggle {

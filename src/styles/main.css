@@ -10,6 +10,8 @@
   --clr-highlight: 150, 58%, 64%;
 
   --panel-alpha: 0.2;
+  --panel-texture-alpha: 0.7;
+  --panel-texture: url("../images/texture.png");
 
   /* Font family, sizing etc */
   --ff-primary: "Be Vietnam Pro", sans-serif;
@@ -168,15 +170,8 @@ main {
 
 section {
   padding: var(--size-400) 0;
-  border-radius: var(--size-300);
   max-width: var(--content-max-width);
   margin-inline: auto;
-  background: hsla(var(--clr-panel-background), var(--panel-alpha));
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
-  backdrop-filter: blur(.75rem);
-  -webkit-backdrop-filter: blur(.75rem);
 }
 
 section:not(:first-of-type) {
@@ -208,6 +203,84 @@ strong {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------ */
+
+/* Panels */
+
+.panel {
+  position: relative;
+  border-radius: var(--size-300);
+  background: hsla(var(--clr-panel-background), var(--panel-alpha));
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+  backdrop-filter: blur(.75rem);
+  -webkit-backdrop-filter: blur(.75rem);
+  pointer-events: none;
+}
+
+.panel::before {    
+  content: "";
+  background-image: var(--panel-texture);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: var(--panel-texture-alpha);
+  pointer-events: none;
+}
+
+@media (min-width: 50em) {
+  .panel-lg {
+    position: relative;
+    border-radius: var(--size-300);
+    background: hsla(var(--clr-panel-background), var(--panel-alpha));
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    backdrop-filter: blur(.75rem);
+    -webkit-backdrop-filter: blur(.75rem);
+    pointer-events: none;
+  }
+
+  .panel-lg::before {    
+    content: "";
+    background-image: var(--panel-texture);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: var(--panel-texture-alpha);
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 50em) {
+  .panel-sm {
+    position: relative;
+    border-radius: var(--size-300);
+    background: hsla(var(--clr-panel-background), var(--panel-alpha));
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5);
+    backdrop-filter: blur(.75rem);
+    -webkit-backdrop-filter: blur(.75rem);
+    pointer-events: none;
+  }
+
+  .panel-sm::before {    
+    content: "";
+    background-image: var(--panel-texture);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: var(--panel-texture-alpha);
+    pointer-events: none;
+  }
+}
 
 /* Utility classes */
 
