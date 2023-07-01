@@ -5,7 +5,7 @@
     element.style.setProperty('--glitch-anim-delay', `${-randomDelay}ms`);
     const randomDirection = Math.random() < 0.5 ? 'alternate' : 'alternate-reverse';
     element.style.setProperty('--glitch-anim-dir', randomDirection);
-    const randomDuration = (Math.random() * 1.5) + 1.5;
+    const randomDuration = (Math.random() * 3) + 1;
     element.style.setProperty('--glitch-anim-duration', `${randomDuration}s`);
     element.style.setProperty('--glitch-content', `'${element.textContent}'`);
   });
@@ -80,7 +80,7 @@
   .glitch-hover:focus::before,
   .glitch-hover:focus::after {
     padding: 3px;
-    margin-left: var(--glitch-left-offset, 0px);
+    margin-left: var(--glitch-left-offset, -10px);
     color: white;
     content: var(--glitch-content);
     position: absolute;

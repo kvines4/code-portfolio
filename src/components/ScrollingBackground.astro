@@ -1,14 +1,14 @@
 ---
-const { content, animSpeedModifier = 1, textColor = "hsl(var(--clr-scrolling-font-default))" } = Astro.props;
+const { content, animSpeedModifier = 1, textColor = "hsl(var(--clr-scrolling-text))" } = Astro.props;
 ---
 
-<div id="bg-container" class="background" data-content={content} data-anim-speed-modifier={animSpeedModifier} data-text-color={textColor}>
+<div id="scrolling-background-container" data-content={content} data-anim-speed-modifier={animSpeedModifier} data-text-color={textColor}>
   <div class="scrolling-background"></div>
 </div>
 
 <script>
 // Get the main container element and params
-const backgroundContainer:HTMLElement = document.getElementById("bg-container") as HTMLElement;
+const backgroundContainer:HTMLElement = document.getElementById("scrolling-background-container") as HTMLElement;
 var content:string = backgroundContainer.dataset.content as string;
 var animSpeedModifier:number = 
   (backgroundContainer.dataset.animSpeedModifier && 
@@ -20,9 +20,9 @@ var textColor:string = backgroundContainer.dataset.textColor as string;
 // Get the scrolling background element
 const scrollingBackground:HTMLElement = document.querySelector('.scrolling-background') as HTMLElement;
 
-// create pre element (rich text) for attaching to our background scroll elements
+// Create pre element (rich text) for attaching to our background scroll elements
 if(!content){
-  // if no content provided, we're going to use the pages own HTML as a default
+  // If no content provided, we're going to use the pages own HTML as a default
   content = document.documentElement.innerHTML;
   // Remove styles using regular expressions to tidy it up a bit
   content = content.replace(/ style="[^"]*"/g, '');
@@ -59,7 +59,7 @@ style.textContent = `
     --bg-rotateX: 2deg;
     --bg-rotateY: -3deg;
     --bg-rotateZ: 5deg;
-    --bg-translateX: -60%;
+    --bg-translateX: -63%;
   }
 
   .scrolling-background {
@@ -72,6 +72,7 @@ style.textContent = `
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+    pointer-events: none;
   }
 
   pre {
@@ -83,6 +84,7 @@ style.textContent = `
     white-space: pre-wrap;
     overflow: hidden;
     word-wrap: break-word;
+    pointer-events: none;
   }
 
   @keyframes scroll {

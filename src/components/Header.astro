@@ -1,11 +1,12 @@
 ---
 import logo from '../images/logo-t.gif';
 ---
-<button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false">
-  <span class="visually-hidden">Menu</span>
-</button>
+
 <header class="primary-header margin-top-600">
-  <div class="fs-primary-heading fw-bold header-logo-container panel">
+  <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false">
+    <span class="visually-hidden">Menu</span>
+  </button>
+  <div class="header-logo-container panel">
     <div class="header-logo-content">
       <img src={logo}>
     </div>
@@ -46,12 +47,8 @@ import logo from '../images/logo-t.gif';
   
   .primary-header {
     display:grid;
-    grid-auto-flow:column;
     grid-template-columns: var(--header-height) 1fr;
     gap: var(--size-600);
-    margin-bottom: var(--size-600);
-    max-width: var(--content-max-width);
-    margin-inline: auto;
   }
 
   .primary-nav-list {
@@ -69,6 +66,10 @@ import logo from '../images/logo-t.gif';
     color: hsl(var(--clr-text-default));
   }
 
+  .primary-nav-list a:where(:hover, :focus) {
+    color: hsl(var(--clr-text-highlight));
+  }
+
   .mobile-nav-toggle {
     display: none;
   }
@@ -76,7 +77,7 @@ import logo from '../images/logo-t.gif';
   @media (max-width: 50em) {
     .primary-header[data-overlay]{
       position: relative;
-      z-index: 8;
+      z-index: 6;
     }
 
     .primary-header[data-overlay]::before {
@@ -84,7 +85,7 @@ import logo from '../images/logo-t.gif';
       position: fixed;
       inset: 0;
       background: hsl(var(--crl-panel-background));
-      z-index: 8;
+      z-index: 6;
       backdrop-filter: blur(.75rem);
       -webkit-backdrop-filter: blur(.75rem);
     }
@@ -102,7 +103,7 @@ import logo from '../images/logo-t.gif';
       margin-inline: auto;
       background: hsl(var(--clr-footer-background));
       border-radius: var(--size-100);
-      z-index: 9;
+      z-index: 7;
     }
 
     .primary-nav-list {
@@ -115,7 +116,7 @@ import logo from '../images/logo-t.gif';
       position: fixed;
       top: var(--size-500);
       right: var(--size-500);
-      z-index: 9;
+      z-index: 7;
       cursor: pointer;
       background: transparent;
       border: 0;
@@ -135,7 +136,6 @@ import logo from '../images/logo-t.gif';
 </style>
 
 <script>
-// ----- Behaviour for the primary nav on mobile -----
 const primaryHeader:HTMLElement = document.querySelector('.primary-header') as HTMLElement;
 const navToggle:HTMLElement     = document.querySelector('.mobile-nav-toggle') as HTMLElement;
 const primaryNav:HTMLElement    = document.querySelector('.primary-nav') as HTMLElement;

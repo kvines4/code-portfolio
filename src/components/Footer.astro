@@ -1,4 +1,4 @@
-<footer class="primary-footer padding-block-700 margin-top-600 bg-footer-background text-primary">
+<footer class="primary-footer padding-block-700 margin-top-900 bg-footer-background text-primary">
   <div class="container">
     <div class="even-columns">
       <div class="text-center-sm footer-section">
@@ -36,6 +36,7 @@
 
 <style>
   .primary-footer {
+    position: relative;
     font-size: var(--fs-nav);
     margin-top: auto;
   }
@@ -44,19 +45,19 @@
     margin-inline: auto;
   }
 
-  .footer-nav a {
-    color: var(--clr-primary);
+  .footer-nav a,
+  .footer-links a {
+    color: var(--clr-text-primary);
     text-decoration: none;
   }
 
   .footer-links a {
-    color: var(--clr-primary);
-    text-decoration: none;
     padding: 0 var(--size-200);
   }
 
+  .footer-nav a:where(:hover, :focus),
   .footer-links a:where(:hover, :focus) {
-    color: white;
+    color: hsl(var(--clr-text-highlight));
     text-decoration: none;
   }
 </style>
